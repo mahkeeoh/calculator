@@ -12,12 +12,20 @@ import UIKit
 class GraphViewController: UIViewController
 {
 
+    @IBOutlet weak var graphView: GraphView!
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
-        let panRecognizer = UIPanGestureRecognizer(target: view, action: #selector(GraphView.handlePan))
+        let panRecognizer = UIPanGestureRecognizer(target: graphView, action: #selector(graphView.handlePan))
+        let pinchRecognizer = UIPinchGestureRecognizer(target: graphView, action: #selector(graphView.handlePinch))
+        let tapRecognizer = UITapGestureRecognizer(target: graphView, action: #selector(graphView.handleTap))
+        tapRecognizer.numberOfTapsRequired = 2
+        
         view.addGestureRecognizer(panRecognizer)
+        view.addGestureRecognizer(pinchRecognizer)
+        view.addGestureRecognizer(tapRecognizer)
     }
 
     override func didReceiveMemoryWarning()

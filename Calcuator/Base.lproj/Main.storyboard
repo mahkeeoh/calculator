@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yWR-dK-VrD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yWR-dK-VrD">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -363,15 +363,35 @@
                         <viewControllerLayoutGuide type="top" id="Rp6-6u-I4r"/>
                         <viewControllerLayoutGuide type="bottom" id="yIB-oP-dTU"/>
                     </layoutGuides>
-                    <view key="view" multipleTouchEnabled="YES" contentMode="top" id="t2l-OQ-jsN" customClass="GraphView" customModule="Calcuator" customModuleProvider="target">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="top" id="t2l-OQ-jsN">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                        <subviews>
+                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="cSR-Fs-eLj" customClass="GraphView" customModule="Calcuator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="scaleFactor">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cSR-Fs-eLj" firstAttribute="top" secondItem="Rp6-6u-I4r" secondAttribute="bottom" id="NDH-Iv-IwK"/>
+                            <constraint firstAttribute="trailing" secondItem="cSR-Fs-eLj" secondAttribute="trailing" id="RCt-pk-Hob"/>
+                            <constraint firstItem="cSR-Fs-eLj" firstAttribute="leading" secondItem="t2l-OQ-jsN" secondAttribute="leading" id="gcB-8u-8o7"/>
+                            <constraint firstItem="cSR-Fs-eLj" firstAttribute="bottom" secondItem="yIB-oP-dTU" secondAttribute="top" id="ofa-rB-tMJ"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="KUw-wm-OSH"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
+                    <connections>
+                        <outlet property="graphView" destination="cSR-Fs-eLj" id="LBO-gO-mDR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gkG-hD-tRw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
