@@ -13,6 +13,13 @@ class GraphViewController: UIViewController
 {
 
     @IBOutlet weak var graphView: GraphView!
+    // insert function here in "didSet" to draw program in graph
+    {
+        didSet
+        {
+            
+        }
+    }
     
     override func viewDidLoad()
     {
