@@ -99,6 +99,9 @@ class CalculatorViewController: UIViewController
         displayValue = brain.result
     }
     
+    // should prepare for segue, (if brain.program = nil || isPartialResult = true, don't move)
+    // prepare for segue, include brain.program as parameter
+    
     
 }
 
