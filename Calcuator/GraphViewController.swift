@@ -17,7 +17,10 @@ class GraphViewController: UIViewController
     {
         didSet
         {
-            
+            // here we want to take the "program" from calculatorBrain and convert it into a working function
+            // for graphView to use.... possibly take the part of calcBrain that already converts to workable function?
+            // ex. sqrt(m) vs. sqrtsymbol(m)
+            // then graph view is as simple as iterating over all x values in view and corresponding y values
         }
     }
     
