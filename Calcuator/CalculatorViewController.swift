@@ -80,8 +80,6 @@ class CalculatorViewController: UIViewController
         displayValue = brain.result
     }
     
-    
-    
     private var brain = CalculatorBrain()
     
     @IBAction private func operationClicked(sender: UIButton)
@@ -97,6 +95,31 @@ class CalculatorViewController: UIViewController
             brain.performCalculation(performOperation)
         }
         displayValue = brain.result
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool
+    {
+        if (brain.isPartialResult != true)
+        {
+            return true
+        }
+        
+        else
+        {
+            return false
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    {
+        if segue.identifier == "showDetail"
+        {
+            let navController = segue.destinationViewController as? UINavigationController
+            if let vc = navController?.topViewController as? GraphViewController
+            {
+                vc.programFunction = brain.program
+            }
+        }
     }
     
     

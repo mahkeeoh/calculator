@@ -11,8 +11,15 @@ import UIKit
 
 class GraphViewController: UIViewController
 {
+    var programFunction: AnyObject?
 
-    @IBOutlet weak var graphView: GraphView!
+    @IBOutlet var graphView: GraphView!
+    {
+        didSet
+        {
+            
+        }
+    }
     
     override func viewDidLoad()
     {
@@ -26,6 +33,8 @@ class GraphViewController: UIViewController
         view.addGestureRecognizer(panRecognizer)
         view.addGestureRecognizer(pinchRecognizer)
         view.addGestureRecognizer(tapRecognizer)
+        
+        print(programFunction?.description)
     }
 
     override func didReceiveMemoryWarning()

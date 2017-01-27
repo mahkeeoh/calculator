@@ -93,7 +93,7 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <state key="normal" title="Graph"/>
                                                         <connections>
-                                                            <segue destination="JLu-8T-hI1" kind="showDetail" id="T5u-Ha-Bvc"/>
+                                                            <segue destination="JLu-8T-hI1" kind="showDetail" identifier="showDetail" id="T5u-Ha-Bvc"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVq-FG-dFG">
@@ -370,11 +370,6 @@
                             <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="cSR-Fs-eLj" customClass="GraphView" customModule="Calcuator" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="scaleFactor">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -440,6 +435,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Xqz-L3-hx9"/>
+        <segue reference="T5u-Ha-Bvc"/>
     </inferredMetricsTieBreakers>
 </document>

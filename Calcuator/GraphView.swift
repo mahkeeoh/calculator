@@ -10,9 +10,9 @@ import UIKit
 
 @IBDesignable class GraphView: UIView
 {
-    var origin: CGPoint?
-    private var translation: CGPoint = CGPointMake(0.0, 0.0)
-    @IBInspectable var pointsPerUnit: CGFloat = 5.0
+    var origin: CGPoint!
+    private var translation: CGPoint!
+    @IBInspectable var pointsPerUnit: CGFloat = 25.0
     private var xChange: CGFloat = 0.0
     private var yChange: CGFloat = 0.0
     private var originChanged = false
@@ -34,8 +34,8 @@ import UIKit
         translation = recognizer.translationInView(self)
         translation.x = translation.x + xChange
         translation.y = translation.y + yChange
-        origin!.x = bounds.midX + translation.x
-        origin!.y = bounds.midY + translation.y
+        origin.x = bounds.midX + translation.x
+        origin.y = bounds.midY + translation.y
         originChanged = true
         setNeedsDisplay()
         
@@ -57,9 +57,15 @@ import UIKit
     func handleTap(recognizer: UITapGestureRecognizer)
     {
         origin = recognizer.locationInView(self)
-        // need to edit xchange/ychange to account for new origin
+        xChange = origin.x - bounds.midX
+        yChange = origin.y - bounds.midY
         originChanged = true
         setNeedsDisplay()
+    }
+    
+    func plotFunction(withYEquals: String)
+    {
+        // find out min y in origin units
     }
 
 }
