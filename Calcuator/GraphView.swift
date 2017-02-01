@@ -8,8 +8,15 @@
 
 import UIKit
 
+protocol GraphViewDataSource: class
+{
+    func calculateY(x: Double) -> Double
+}
+
 @IBDesignable class GraphView: UIView
 {
+    
+    weak var graphViewDataSource: GraphViewDataSource?
     var origin: CGPoint!
     private var translation: CGPoint!
     @IBInspectable var pointsPerUnit: CGFloat = 25.0
@@ -26,6 +33,7 @@ import UIKit
             origin = CGPointMake(bounds.midX, bounds.midY)
         }
         drawAxis.drawAxesInRect(bounds, origin: origin!, pointsPerUnit: pointsPerUnit)
+        plotFunction()
     }
     
     func handlePan(recognizer: UIPanGestureRecognizer)
@@ -63,9 +71,27 @@ import UIKit
         setNeedsDisplay()
     }
     
-    func plotFunction(withYEquals: String)
+    func plotFunction()
     {
-        // find out min y in origin units
+        // find out width of x in origin units (-25 to 25 graph would be 50)
+        let path = UIBezierPath()
+        path.lineWidth = 1.0
+        
+        for xValue in 0...Int(bounds.width)
+        {
+            let y = graphViewDataSource!.calculateY(Double(xValue))
+            let point = CGPointMake(CGFloat(xValue), CGFloat(y))
+            if xValue == 0
+            {
+                path.moveToPoint(point)
+            }
+            else
+            {
+                path.addLineToPoint(point)
+            }
+        }
+        UIColor.blackColor().setStroke()
+        path.stroke()
     }
 
 }

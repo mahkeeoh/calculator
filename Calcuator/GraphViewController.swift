@@ -9,15 +9,25 @@
 import UIKit
 
 
-class GraphViewController: UIViewController
+class GraphViewController: UIViewController, GraphViewDataSource
 {
     var programFunction: AnyObject?
+    {
+        didSet
+        {
+            if programFunction != nil
+            {
+                brain.program = programFunction!
+            }
+        }
+    }
+    private let brain = CalculatorBrain()
 
     @IBOutlet var graphView: GraphView!
     {
         didSet
         {
-            
+            graphView.graphViewDataSource = self
         }
     }
     
@@ -34,7 +44,6 @@ class GraphViewController: UIViewController
         view.addGestureRecognizer(pinchRecognizer)
         view.addGestureRecognizer(tapRecognizer)
         
-        print(programFunction?.description)
     }
 
     override func didReceiveMemoryWarning()
@@ -44,14 +53,10 @@ class GraphViewController: UIViewController
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func calculateY(x: Double) -> Double
+    {
+        brain.variableValues["M"] = x
+        return brain.result
     }
-    */
 
 }
