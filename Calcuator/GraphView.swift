@@ -73,25 +73,29 @@ protocol GraphViewDataSource: class
     
     func plotFunction()
     {
-        // find out width of x in origin units (-25 to 25 graph would be 50)
-        let path = UIBezierPath()
-        path.lineWidth = 1.0
-        
-        for xValue in 0...Int(bounds.width)
+        if graphViewDataSource != nil
         {
-            let y = graphViewDataSource!.calculateY(Double(xValue))
-            let point = CGPointMake(CGFloat(xValue), CGFloat(y))
-            if xValue == 0
+            // find out width of x in origin units (-25 to 25 graph would be 50)
+            let path = UIBezierPath()
+            path.lineWidth = 1.0
+            
+            for xValue in 0...Int(bounds.width / pointsPerUnit)
             {
-                path.moveToPoint(point)
+                let xConverted = (bounds.width / pointsPerUnit) - (origin.x / pointsPerUnit)
+                let y = graphViewDataSource!.calculateY(Double(xConverted))
+                let point = CGPointMake(CGFloat(xValue), CGFloat(y))
+                if xValue == 0
+                {
+                    path.moveToPoint(point)
+                }
+                else
+                {
+                    path.addLineToPoint(point)
+                }
             }
-            else
-            {
-                path.addLineToPoint(point)
-            }
+            UIColor.blackColor().setStroke()
+            path.stroke()
         }
-        UIColor.blackColor().setStroke()
-        path.stroke()
     }
 
 }
