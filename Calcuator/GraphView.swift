@@ -26,7 +26,7 @@ protocol GraphViewDataSource: class
     
     override func drawRect(rect: CGRect)
     {
-        let drawAxis = AxesDrawer.init(color: UIColor.blackColor(), contentScaleFactor: 1.0)
+        let drawAxis = AxesDrawer.init(color: UIColor.blackColor(), contentScaleFactor: contentScaleFactor)
 
         if originChanged == false
         {
@@ -79,12 +79,13 @@ protocol GraphViewDataSource: class
             let path = UIBezierPath()
             path.lineWidth = 1.0
             
-            for xValue in 0...Int(bounds.width / pointsPerUnit)
+            for xValue in 0...Int(bounds.width * contentScaleFactor)
             {
-                let xConverted = (bounds.width / pointsPerUnit) - (origin.x / pointsPerUnit)
-                let y = graphViewDataSource!.calculateY(Double(xConverted))
+                let xConverted = (CGFloat(xValue) - origin.x) / pointsPerUnit
+                let yConverted = graphViewDataSource!.calculateY(Double(xConverted))
+                let y = origin.y - CGFloat(yConverted) * pointsPerUnit
                 let point = CGPointMake(CGFloat(xValue), CGFloat(y))
-                if xValue == 0
+                if xValue == 0 || yConverted.isFinite == false
                 {
                     path.moveToPoint(point)
                 }
