@@ -8,18 +8,31 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController
+class CalculatorViewController: UIViewController, UISplitViewControllerDelegate
 {
     @IBOutlet weak var calcDisplay: UILabel!
     @IBOutlet weak var historyDisplay: UILabel!
     
-    private var isCurrentlyTyping = false
+    fileprivate var isCurrentlyTyping = false
     
-    @IBAction private func buttonClicked(sender: UIButton)
+    override func awakeFromNib() {
+        self.splitViewController?.delegate = self
+    }
+    
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
+        if primaryViewController.content == self {
+            if let svc = secondaryViewController.content as? GraphViewController {
+                return true
+            }
+        }
+        return false
+    }
+    
+    @IBAction fileprivate func buttonClicked(_ sender: UIButton)
     {
         if isCurrentlyTyping
         {
-            if !((sender.currentTitle! == ".") && (calcDisplay.text?.rangeOfString(".")) != nil)
+            if !((sender.currentTitle! == ".") && (calcDisplay.text?.range(of: ".")) != nil)
             {
                 let  currentDigits = calcDisplay.text
                 calcDisplay.text = currentDigits! + sender.currentTitle!
@@ -39,7 +52,7 @@ class CalculatorViewController: UIViewController
         isCurrentlyTyping = true
     }
 
-    private var displayValue: Double?
+    fileprivate var displayValue: Double?
         {
         get {
             return Double(calcDisplay.text!)
@@ -51,22 +64,7 @@ class CalculatorViewController: UIViewController
         }
     }
     
-    var savedProgram: CalculatorBrain.PropertyList?
-    
-    @IBAction func save()
-    {
-        savedProgram = brain.program
-    }
-    
-    @IBAction func restore()
-    {
-        if savedProgram != nil
-        {
-            brain.program = savedProgram!
-            displayValue = brain.result
-        }
-    }
-    
+
     @IBAction func setVariable()
     {
         isCurrentlyTyping = false
@@ -80,9 +78,9 @@ class CalculatorViewController: UIViewController
         displayValue = brain.result
     }
     
-    private var brain = CalculatorBrain()
+    fileprivate var brain = CalculatorBrain()
     
-    @IBAction private func operationClicked(sender: UIButton)
+    @IBAction fileprivate func operationClicked(_ sender: UIButton)
     {
         if isCurrentlyTyping
         {
@@ -97,31 +95,45 @@ class CalculatorViewController: UIViewController
         displayValue = brain.result
     }
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool
-    {
-        if (brain.isPartialResult != true)
-        {
-            return true
-        }
-        
-        else
-        {
-            return false
-        }
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return !brain.isPartialResult
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
     {
         if segue.identifier == "showDetail"
         {
-            let navController = segue.destinationViewController as? UINavigationController
-            if let vc = navController?.topViewController as? GraphViewController
+//            var destinationVC = segue.destination
+//            if let navigationVC = destinationVC as? UINavigationController {
+//                destinationVC = navigationVC.visibleViewController ?? destinationVC
+//            }
+          //  if let vc = destinationVC as? GraphViewController
+            if let vc = segue.destination.content as? GraphViewController
             {
-                vc.programFunction = brain.program
+                vc.programFunction = { (xValue: Double) -> Double in
+                    
+                    self.brain.variableValues["M"] = xValue
+                    self.brain.program = self.brain.program
+                    print(self.brain.result)
+                    return Double(self.brain.result)
+                    
+                }
             }
         }
     }
     
     
+}
+
+extension UIViewController {
+    
+    var content: UIViewController {
+        if let navCon = self as? UINavigationController {
+            return navCon.visibleViewController ?? self
+        }
+        else {
+            return self
+        }
+    }
 }
 

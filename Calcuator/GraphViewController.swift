@@ -11,17 +11,9 @@ import UIKit
 
 class GraphViewController: UIViewController, GraphViewDataSource
 {
-    var programFunction: AnyObject?
-    {
-        didSet
-        {
-            if programFunction != nil
-            {
-                brain.program = programFunction!
-            }
-        }
-    }
-    private let brain = CalculatorBrain()
+    var programFunction: ((Double) -> Double)?
+
+    fileprivate let brain = CalculatorBrain()
 
     @IBOutlet var graphView: GraphView!
     {
@@ -53,10 +45,11 @@ class GraphViewController: UIViewController, GraphViewDataSource
     }
     
 
-    func calculateY(x: Double) -> Double
-    {
-        brain.variableValues["M"] = x
-        return brain.result
+    func calculateY(_ x: Double) -> Double? {
+        if let programFunction = programFunction {
+            return programFunction(x)
+        }
+        return nil
     }
 
 }

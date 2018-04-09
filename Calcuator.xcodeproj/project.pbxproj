@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2622C56E1E31818600C0F065 /* AxesDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2622C56D1E31818600C0F065 /* AxesDrawer.swift */; };
+		2610F6351F7205C700C59164 /* AxesDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2610F6341F7205C700C59164 /* AxesDrawer.swift */; };
 		2622C5701E31A8E100C0F065 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2622C56F1E31A8E100C0F065 /* GraphViewController.swift */; };
 		2622C5721E3312A600C0F065 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2622C5711E3312A600C0F065 /* GraphView.swift */; };
 		26403F951DAACD670024B8F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26403F941DAACD670024B8F3 /* AppDelegate.swift */; };
@@ -15,11 +15,11 @@
 		26403F9A1DAACD670024B8F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26403F981DAACD670024B8F3 /* Main.storyboard */; };
 		26403F9C1DAACD670024B8F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26403F9B1DAACD670024B8F3 /* Assets.xcassets */; };
 		26403F9F1DAACD670024B8F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26403F9D1DAACD670024B8F3 /* LaunchScreen.storyboard */; };
-		26C51FC61DB589C40023C184 /* Calculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C51FC51DB589C40023C184 /* Calculation.swift */; };
+		26C51FC61DB589C40023C184 /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C51FC51DB589C40023C184 /* CalculatorBrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2622C56D1E31818600C0F065 /* AxesDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxesDrawer.swift; sourceTree = "<group>"; };
+		2610F6341F7205C700C59164 /* AxesDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxesDrawer.swift; sourceTree = "<group>"; };
 		2622C56F1E31A8E100C0F065 /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		2622C5711E3312A600C0F065 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		26403F911DAACD670024B8F3 /* Calcuator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calcuator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,7 +29,7 @@
 		26403F9B1DAACD670024B8F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		26403F9E1DAACD670024B8F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26403FA01DAACD670024B8F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		26C51FC51DB589C40023C184 /* Calculation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Calculation.swift; sourceTree = "<group>"; };
+		26C51FC51DB589C40023C184 /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,12 +63,12 @@
 			isa = PBXGroup;
 			children = (
 				26403F941DAACD670024B8F3 /* AppDelegate.swift */,
-				26C51FC51DB589C40023C184 /* Calculation.swift */,
+				26C51FC51DB589C40023C184 /* CalculatorBrain.swift */,
 				26403F961DAACD670024B8F3 /* CalculatorViewController.swift */,
 				26403F981DAACD670024B8F3 /* Main.storyboard */,
 				2622C56F1E31A8E100C0F065 /* GraphViewController.swift */,
 				2622C5711E3312A600C0F065 /* GraphView.swift */,
-				2622C56D1E31818600C0F065 /* AxesDrawer.swift */,
+				2610F6341F7205C700C59164 /* AxesDrawer.swift */,
 				26403F9B1DAACD670024B8F3 /* Assets.xcassets */,
 				26403F9D1DAACD670024B8F3 /* LaunchScreen.storyboard */,
 				26403FA01DAACD670024B8F3 /* Info.plist */,
@@ -109,6 +109,7 @@
 					26403F901DAACD670024B8F3 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 2YZ54TVF57;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -150,10 +151,10 @@
 			files = (
 				26403F971DAACD670024B8F3 /* CalculatorViewController.swift in Sources */,
 				2622C5701E31A8E100C0F065 /* GraphViewController.swift in Sources */,
-				2622C56E1E31818600C0F065 /* AxesDrawer.swift in Sources */,
-				26C51FC61DB589C40023C184 /* Calculation.swift in Sources */,
+				26C51FC61DB589C40023C184 /* CalculatorBrain.swift in Sources */,
 				26403F951DAACD670024B8F3 /* AppDelegate.swift in Sources */,
 				2622C5721E3312A600C0F065 /* GraphView.swift in Sources */,
+				2610F6351F7205C700C59164 /* AxesDrawer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +224,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -264,7 +265,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -278,6 +279,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Habituate.Calcuator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -291,6 +293,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Habituate.Calcuator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

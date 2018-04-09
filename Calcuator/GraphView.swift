@@ -10,65 +10,57 @@ import UIKit
 
 protocol GraphViewDataSource: class
 {
-    func calculateY(x: Double) -> Double
+    func calculateY(_ x: Double) -> Double?
 }
 
 @IBDesignable class GraphView: UIView
 {
     
     weak var graphViewDataSource: GraphViewDataSource?
-    var origin: CGPoint!
-    private var translation: CGPoint!
-    @IBInspectable var pointsPerUnit: CGFloat = 25.0
-    private var xChange: CGFloat = 0.0
-    private var yChange: CGFloat = 0.0
-    private var originChanged = false
-    
-    override func drawRect(rect: CGRect)
-    {
-        let drawAxis = AxesDrawer.init(color: UIColor.blackColor(), contentScaleFactor: contentScaleFactor)
+    var origin: CGPoint! {didSet {setNeedsDisplay()}}
+    fileprivate var translation: CGPoint!
+    @IBInspectable var pointsPerUnit: CGFloat = 25.0 {didSet {setNeedsDisplay()}}
 
-        if originChanged == false
-        {
-            origin = CGPointMake(bounds.midX, bounds.midY)
-        }
-        drawAxis.drawAxesInRect(bounds, origin: origin!, pointsPerUnit: pointsPerUnit)
+    
+    override func draw(_ rect: CGRect)
+    {
+        let axisDraw = AxesDrawer.init(color: UIColor.black, contentScaleFactor: contentScaleFactor)
+
+        origin = origin ?? CGPoint(x: bounds.midX, y: bounds.midY)
+
+        axisDraw.drawAxes(bounds, origin: origin!, pointsPerUnit: pointsPerUnit)
+        
         plotFunction()
     }
     
-    func handlePan(recognizer: UIPanGestureRecognizer)
+    func handlePan(_ recognizer: UIPanGestureRecognizer)
     {
+        switch recognizer.state {
+        case .changed, .ended:
+            let translation = recognizer.translation(in: self)
+            origin.x += translation.x
+            origin.y += translation.y
+            recognizer.setTranslation(CGPoint(), in: self)
+        default: break
+        }
         
-        translation = recognizer.translationInView(self)
-        translation.x = translation.x + xChange
-        translation.y = translation.y + yChange
-        origin.x = bounds.midX + translation.x
-        origin.y = bounds.midY + translation.y
-        originChanged = true
-        setNeedsDisplay()
-        
-        if recognizer.state == .Ended
-        {
-            xChange =  translation.x
-            yChange =  translation.y
+    }
+    
+    func handlePinch(_ recognizer: UIPinchGestureRecognizer)
+    {
+        switch recognizer.state {
+        case .changed, .ended:
+            pointsPerUnit *= recognizer.scale
+            recognizer.scale = 1.0
+        default: break
         }
     }
     
-    func handlePinch(recognizer: UIPinchGestureRecognizer)
+    func handleTap(_ recognizer: UITapGestureRecognizer)
     {
-        pointsPerUnit *= recognizer.scale
-        recognizer.scale = 1.0
-        originChanged = true
-        setNeedsDisplay()
-    }
-    
-    func handleTap(recognizer: UITapGestureRecognizer)
-    {
-        origin = recognizer.locationInView(self)
-        xChange = origin.x - bounds.midX
-        yChange = origin.y - bounds.midY
-        originChanged = true
-        setNeedsDisplay()
+        if recognizer.state == .ended {
+            origin = recognizer.location(in: self)
+        }
     }
     
     func plotFunction()
@@ -78,23 +70,29 @@ protocol GraphViewDataSource: class
             // find out width of x in origin units (-25 to 25 graph would be 50)
             let path = UIBezierPath()
             path.lineWidth = 1.0
-            
-            for xValue in 0...Int(bounds.width * contentScaleFactor)
-            {
-                let xConverted = (CGFloat(xValue) - origin.x) / pointsPerUnit
-                let yConverted = graphViewDataSource!.calculateY(Double(xConverted))
-                let y = origin.y - CGFloat(yConverted) * pointsPerUnit
-                let point = CGPointMake(CGFloat(xValue), CGFloat(y))
-                if xValue == 0 || yConverted.isFinite == false
-                {
-                    path.moveToPoint(point)
-                }
-                else
-                {
-                    path.addLineToPoint(point)
+            let width = Int(bounds.width * contentScaleFactor)
+            var point = CGPoint()
+            var emptyPath = true
+            for xValue in 0...width {
+                point.x = CGFloat(xValue) / contentScaleFactor
+                if let y = graphViewDataSource!.calculateY(Double((point.x - origin.x) / pointsPerUnit)) {
+                    if !y.isNormal && !y.isZero {
+                        emptyPath = true
+                        continue
+                    }
+                    
+                    point.y = origin.y - CGFloat(y) * pointsPerUnit
+                    
+                    if emptyPath {
+                        path.move(to: point)
+                        emptyPath = false
+                    }
+                    else {
+                        path.addLine(to: point)
+                    }
                 }
             }
-            UIColor.blackColor().setStroke()
+            UIColor.black.setStroke()
             path.stroke()
         }
     }
