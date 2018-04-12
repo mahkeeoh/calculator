@@ -21,7 +21,7 @@ class CalculatorViewController: UIViewController, UISplitViewControllerDelegate
     
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         if primaryViewController.content == self {
-            if let svc = secondaryViewController.content as? GraphViewController {
+            if let _ = secondaryViewController.content as? GraphViewController {
                 return true
             }
         }

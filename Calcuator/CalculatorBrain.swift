@@ -36,7 +36,7 @@ class CalculatorBrain
     }
     
     fileprivate var operations: Dictionary<String,Operation> = [
-        "∏" : Operation.constant("∏", M_PI),
+        "∏" : Operation.constant("∏", .pi),
         "e" : Operation.constant("e", M_E),
         "AC": Operation.restart,
         "√" : Operation.unaryOperation("√", sqrt),
