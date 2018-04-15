@@ -1,16 +1,10 @@
 # Graphing Calculator (CS193P Assignment)
 
-\n
-
-
-
-
-
-
-
 <p align="center">
   <img width="281.25" height="580" src="https://github.com/mahkeeoh/calculator/blob/master/Calcuator/Assets.xcassets/fullsizeoutput_110.imageset/fullsizeoutput_110.jpeg">
 </p>
+
+* Capable of storing and displaying all previous operations
 
 <p align="center">
   <img width="281.25" height="580" src="https://github.com/mahkeeoh/calculator/blob/master/Calcuator/Assets.xcassets/fullsizeoutput_111.imageset/fullsizeoutput_111.jpeg">
