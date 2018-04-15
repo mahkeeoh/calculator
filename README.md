@@ -1,12 +1,6 @@
-#Graphing Calculator (CS193P Assignment)
+# Graphing Calculator (CS193P Assignment)
 
-
-
-
-
-
-
-
+\n
 
 
 
