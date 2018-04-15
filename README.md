@@ -16,6 +16,7 @@
   <img width="281.25" height="580" src="https://github.com/mahkeeoh/calculator/blob/master/Calcuator/Assets.xcassets/fullsizeoutput_112.imageset/fullsizeoutput_112.jpeg">
 </p>
 
+* Graph view with ability to scroll and zoom
 
 <p align="center">
   <img width="281.25" height="580" src="https://github.com/mahkeeoh/calculator/blob/master/Calcuator/Assets.xcassets/fullsizeoutput_113.imageset/fullsizeoutput_113.jpeg">
